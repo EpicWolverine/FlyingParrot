@@ -1,0 +1,13 @@
+<hr>
+<div class="cat">
+	<div class="label"><a ng-href="#/cat/{{cat.name}}">
+		{{ cat.displayName }} <!-- or, if there is no seperate displayName... -->
+		<div ng-if="cat.displayName == null">{{ cat.name }}</div>
+	</a></div>
+	<div ng-repeat="sound in cat.sounds" style="display: inline-block;">
+		<sound-button sound="sound"></sound-button>
+	</div>
+	<div ng-repeat="subcat in cat.subcats" class="subcat">
+		<subcat subcat="subcat" parent-name="cat.name"></subcat>
+	</div>
+</div>

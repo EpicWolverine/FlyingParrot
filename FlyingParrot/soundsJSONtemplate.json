@@ -1,0 +1,25 @@
+,
+	{"name": "CatName",
+	"displayName": "", //optional; displayed instead of name
+	"sounds": [
+		{"text": "text!",
+		"src": "src"},
+		{"text": "text!",
+		"src": "src"}
+	],
+	"subcats": [
+		{"name": "SubCatName1",
+		"sounds": [
+			{"text": "text!",
+			"src": "src"},
+			{"text": "text!",
+			"src": "src"}
+		]},
+		{"name": "SubCatName2",
+		"sounds": [
+			{"text": "text!",
+			"src": "src"},
+			{"text": "text!",
+			"src": "src"}
+		]}
+	]}
