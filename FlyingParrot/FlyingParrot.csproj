@@ -117,6 +117,7 @@
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="sounds.json" />
+    <None Include="Properties\PublishProfiles\FlyingParrot - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
