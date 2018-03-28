@@ -8,7 +8,7 @@ app.controller('SoundController', ['$scope', 'Page', 'sounds', '$routeParams', '
                     $scope.soundDetail = data.cats[cat].sounds[sound];
                     redirect = false;
                     looping = false;
-                    Page.setTitle($scope.soundDetail.text + " - Parrot");
+                    Page.setTitle($scope.soundDetail.text + " - Flying Parrot");
                     break;
                 }
             }
@@ -18,7 +18,7 @@ app.controller('SoundController', ['$scope', 'Page', 'sounds', '$routeParams', '
                         $scope.soundDetail = data.cats[cat].subcats[subcat].sounds[sound];
                         redirect = false;
                         looping = false;
-                        Page.setTitle($scope.soundDetail.text + " - Parrot");
+                        Page.setTitle($scope.soundDetail.text + " - Flying Parrot");
                         break;
                     }
                 }

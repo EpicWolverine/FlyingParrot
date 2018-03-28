@@ -1,4 +1,4 @@
-var app = angular.module('parrot',['ngRoute']);
+var app = angular.module('flying_parrot',['ngRoute']);
 
 app.config(function ($routeProvider) {
     $routeProvider
