@@ -4,5 +4,5 @@ app.controller('HomeController', ['$scope', 'Page', 'sounds', function($scope, P
         $scope.sounds = data; //store the data in $scope.example
     });
     
-    Page.setTitle("Parrot");
+    Page.setTitle("Flying Parrot");
 }]);
