@@ -8,22 +8,33 @@ using FlyingParrot.Models;
 
 namespace FlyingParrot.Controllers
 {
-	//[RoutePrefix("api/Sound")]
+	[RoutePrefix("api/Sound")]
 	public class SoundController : ApiController
 	{
-		public static List<Sound> sounds;
+		//public static List<Sound> sounds;
 
 		[HttpGet]
 		[Route("All")]
 		public IEnumerable<Sound> GetAllSounds() {
-			sounds = Sound.LoadAll();
-			return sounds;
+			//sounds = Sound.LoadAll();
+			//return sounds;
+			return Sound.LoadAll();
 		}
 
 		[HttpGet]
-		//[Route("Bathrooms")]
 		public Sound GetSoundsById(int id) {
-			return sounds.FirstOrDefault(x => x.Id == id);
+			//return sounds.FirstOrDefault(x => x.Id == id);
+			var sound = new Sound();
+			sound.LoadData(id);
+			return sound;
+		}
+
+
+		[HttpGet]
+		public IEnumerable<Sound> GetSoundsByCategory(int category) {
+			var tempCategory = new Category();
+			tempCategory.LoadSounds(category);
+			return tempCategory.Sounds;
 		}
 	}
 }

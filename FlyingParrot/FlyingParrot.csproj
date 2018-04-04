@@ -109,10 +109,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
     <Compile Include="Controllers\SoundController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Sound.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
