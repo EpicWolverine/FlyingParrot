@@ -7,28 +7,28 @@ using System.Linq;
 using System.Web;
 
 namespace FlyingParrot.Models {
-	public class Sound {
+	public class Sound { 
 		public int Id { get; set; }
 		public string Text { get; set; }
 		public string Filename { get; set; }
 		public string Uploader { get; set; }
 		public int? Category { get; set; }
 
-		public Sound() {
+		public Sound() { //sound constructor
 			Id = 0;
 			Text = "";
 			Filename = "";
 			Uploader = "";
 		}
 
-		public Sound(int id, string text, string filename, string uploader) {
+		public Sound(int id, string text, string filename, string uploader) { //sound initializer
 			Id = id;
 			Text = text;
 			Filename = filename;
 			Uploader = uploader;
 		}
 
-		public bool LoadData(int id) {
+		public bool LoadData(int id) { 
 			using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString)) {
 				con.Open();
 				//get sound data
@@ -52,6 +52,20 @@ namespace FlyingParrot.Models {
 				return true;
 			}
 		}
+        public static bool AddData(Sound NewSound) {
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString)) {
+                con.Open();
+                SqlCommand soundCMD = new SqlCommand("INSERT INTO SOUNDS([FILENAME], [UPLOADER], [TEXT], [CATEGORY]) VALUES(@Filename, @Uploader, @Text, @Category)")
+                    soundCMD.Parameters.Add("@Filename", SqlDbType.string).SqlValue = NewSound.Filename;
+                soundCMD.Parameters.Add("@Uploader", SqlDbType.string).SqlValue = NewSound.Uploader;
+                soundCMD.Parameters.Add("@Text", SqlDbType.string).SqlValue = NewSound.Text;
+                soundCMD.Parameters.Add("@Category", SqlDbType.string).SqlValue = NewSound.Category;
+                int Temp = soundCMD.ExecuteNonQuery();
+                con.Close();
+                if (Temp) return true;
+                else return false;
+            }
+        }
 
 		public static IEnumerable<Sound> LoadAll() {
 			List<Sound> sounds = new List<Sound>();
