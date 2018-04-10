@@ -97,14 +97,10 @@
     <Content Include="js\directives\ngTouchstart.js" />
     <Content Include="js\directives\soundButton.html" />
     <Content Include="js\directives\soundButton.js" />
-    <Content Include="js\directives\subcat.html" />
-    <Content Include="js\directives\subcat.js" />
     <Content Include="js\services\Page.js" />
-    <Content Include="js\services\sounds.js" />
     <Content Include="views\cat.html" />
     <Content Include="views\home.html" />
     <Content Include="views\sound.html" />
-    <Content Include="views\subcat.html" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -120,7 +116,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="sounds.json" />
     <None Include="Properties\PublishProfiles\FlyingParrot - Web Deploy.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

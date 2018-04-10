@@ -10,10 +10,6 @@ app.config(function ($routeProvider) {
             controller: 'CatController',
             templateUrl: './views/cat.html'
         })
-        .when('/cat/:cat/:subcat', {
-            controller: 'CatController',
-            templateUrl: './views/subcat.html'
-        })
         .when('/sound/:id', {
             controller: 'SoundController',
             templateUrl: './views/sound.html'
