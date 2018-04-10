@@ -16,5 +16,12 @@ namespace FlyingParrot.Controllers
 		public IEnumerable<Category> GetAllSounds() {
 			return Category.LoadAll();
 		}
+
+		[HttpGet]
+		public Category GetCategoryWithSounds(int id) {
+			var category = new Category() { Id = id };
+			category.LoadSounds();
+			return category;
+		}
 	}
 }
