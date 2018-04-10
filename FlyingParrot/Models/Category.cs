@@ -22,14 +22,20 @@ namespace FlyingParrot.Models {
 			Name = name;
 		}
 
-		public bool LoadSounds(int id) {
+		public static IEnumerable<Category> LoadAll() {
+			var categories = (List<Category>)LoadCategories();
+			categories.ForEach(x => x.LoadSounds());
+			return categories;
+		}
+
+		public bool LoadSounds() {
 			using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString)) {
 				con.Open();
 				//get category data
 				SqlCommand nameCmd = new SqlCommand(@"SELECT [Name]
 														FROM Categories
 														WHERE Categories.[Id] = @Id", con);
-				nameCmd.Parameters.Add("@Id", SqlDbType.Int).SqlValue = id;
+				nameCmd.Parameters.Add("@Id", SqlDbType.Int).SqlValue = Id;
 				Name = (string)nameCmd.ExecuteScalar();
 
 				//get sound data
@@ -37,7 +43,7 @@ namespace FlyingParrot.Models {
 														FROM Sounds
 														INNER JOIN Categories On Categories.[Id] = Sounds.[Category]
 														WHERE Categories.[Id] = @Id", con);
-				soundCmd.Parameters.Add("@Id", SqlDbType.Int).SqlValue = id;
+				soundCmd.Parameters.Add("@Id", SqlDbType.Int).SqlValue = Id;
 				SqlDataReader soundReader = soundCmd.ExecuteReader();
 				if (soundReader.HasRows) {
 					Sounds = new List<Sound>();
@@ -60,13 +66,13 @@ namespace FlyingParrot.Models {
 			}
 		}
 
-		public static IEnumerable<Category> LoadAll() {
+		public static IEnumerable<Category> LoadCategories() {
 			List<Category> categories = new List<Category>();
 
 			using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString)) {
 				con.Open();
 
-				//get sound data
+				//get category data
 				SqlCommand cmd = new SqlCommand(@"SELECT [Id], [Name]
 														FROM Categories", con);
 				SqlDataReader reader = cmd.ExecuteReader();
