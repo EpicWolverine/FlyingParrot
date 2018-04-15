@@ -1,15 +1,11 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
 
 namespace FlyingParrot
 {
-    public static class WebApiConfig
-    {
-        public static void Register(HttpConfiguration config)
-        {
-            // Web API configuration and services
 	public static class WebApiConfig
 	{
 		public static void Register(HttpConfiguration config)
