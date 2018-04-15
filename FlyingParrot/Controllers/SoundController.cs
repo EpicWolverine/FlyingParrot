@@ -29,7 +29,6 @@ namespace FlyingParrot.Controllers
             return sound;
         }
 
-
         [HttpGet]
         public IEnumerable<Sound> GetSoundsByCategory(int category) {
             var tempCategory = new Category();
@@ -41,5 +40,12 @@ namespace FlyingParrot.Controllers
         public bool AddSoundToDb(Sound NewSound) {
             return Sound.AddData(NewSound);
         }
+
+		[HttpGet]
+		public IEnumerable<Sound> GetSoundsByCategory(int category) {
+			var tempCategory = new Category() { Id = category };
+			tempCategory.LoadSounds();
+			return tempCategory.Sounds;
+		}
 	}
 }

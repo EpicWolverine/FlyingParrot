@@ -1,4 +1,4 @@
 <div class="soundButtonContainer">
-    <button class="soundButton" ng-click="playSound(sound.src);" ng-touchstart="playSound(sound.src);">{{ sound.text }}</button>
-    <a ng-href="#/sound/{{sound.src}}"><img src="DirectLinkIcon.png" class="directLinkIcon"/></a>
+    <button class="soundButton" ng-click="playSound(sound.filename);" ng-touchstart="playSound(sound.filename);">{{ sound.text }}</button>
+    <a ng-href="#/sound/{{sound.id}}"><img src="DirectLinkIcon.png" class="directLinkIcon"/></a>
 </div>
