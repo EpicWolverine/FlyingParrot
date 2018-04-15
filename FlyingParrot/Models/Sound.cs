@@ -55,14 +55,14 @@ namespace FlyingParrot.Models {
         public static bool AddData(Sound NewSound) {
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString)) {
                 con.Open();
-                SqlCommand soundCMD = new SqlCommand("INSERT INTO SOUNDS([FILENAME], [UPLOADER], [TEXT], [CATEGORY]) VALUES(@Filename, @Uploader, @Text, @Category)")
-                    soundCMD.Parameters.Add("@Filename", SqlDbType.string).SqlValue = NewSound.Filename;
-                soundCMD.Parameters.Add("@Uploader", SqlDbType.string).SqlValue = NewSound.Uploader;
-                soundCMD.Parameters.Add("@Text", SqlDbType.string).SqlValue = NewSound.Text;
-                soundCMD.Parameters.Add("@Category", SqlDbType.string).SqlValue = NewSound.Category;
+                SqlCommand soundCMD = new SqlCommand("INSERT INTO SOUNDS([FILENAME], [UPLOADER], [TEXT], [CATEGORY]) VALUES(@Filename, @Uploader, @Text, @Category)");
+                soundCMD.Parameters.Add("@Filename", SqlDbType.NVarChar).SqlValue = NewSound.Filename;
+                soundCMD.Parameters.Add("@Uploader", SqlDbType.NVarChar).SqlValue = NewSound.Uploader;
+                soundCMD.Parameters.Add("@Text", SqlDbType.NVarChar).SqlValue = NewSound.Text;
+                soundCMD.Parameters.Add("@Category", SqlDbType.NVarChar).SqlValue = NewSound.Category;
                 int Temp = soundCMD.ExecuteNonQuery();
                 con.Close();
-                if (Temp) return true;
+                if (Temp > 0) return true;
                 else return false;
             }
         }
