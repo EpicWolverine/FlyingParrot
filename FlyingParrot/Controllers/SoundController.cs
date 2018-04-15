@@ -30,7 +30,7 @@ namespace FlyingParrot.Controllers
         }
 
         [HttpPost]
-        public bool AddSoundToDb(Sound NewSound) {
+        public bool AddSoundToDb([FromBody] Sound NewSound) {
             return Sound.AddData(NewSound);
         }
 

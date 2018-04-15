@@ -55,11 +55,19 @@ namespace FlyingParrot.Models {
         public static bool AddData(Sound NewSound) {
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString)) {
                 con.Open();
+                SqlCommand CompareCat = new SqlCommand("SELECT [Id] FROM CATEGORIES WHERE Name = @Category");
+                CompareCat.Parameters.Add("@Category", SqlDbType.NVarChar).SqlValue = NewSound.Category;
+                int? Id = CompareCat.ExecuteNonQuery();
+                if(Id == null) {
+                    SqlCommand CreateCat = new SqlCommand("INSERT INTO CATEGORIES([Name]) VALUES(@Category)");
+                    CreateCat.Parameters.Add("@Category", SqlDbType.NVarChar).SqlValue = NewSound.Category;
+                    Id = CreateCat.ExecuteNonQuery();
+                }
                 SqlCommand soundCMD = new SqlCommand("INSERT INTO SOUNDS([FILENAME], [UPLOADER], [TEXT], [CATEGORY]) VALUES(@Filename, @Uploader, @Text, @Category)");
                 soundCMD.Parameters.Add("@Filename", SqlDbType.NVarChar).SqlValue = NewSound.Filename;
                 soundCMD.Parameters.Add("@Uploader", SqlDbType.NVarChar).SqlValue = NewSound.Uploader;
                 soundCMD.Parameters.Add("@Text", SqlDbType.NVarChar).SqlValue = NewSound.Text;
-                soundCMD.Parameters.Add("@Category", SqlDbType.NVarChar).SqlValue = NewSound.Category;
+                soundCMD.Parameters.Add("@Category", SqlDbType.Int).SqlValue = Id;
                 int Temp = soundCMD.ExecuteNonQuery();
                 con.Close();
                 if (Temp > 0) return true;
