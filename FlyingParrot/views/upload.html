@@ -1,0 +1,13 @@
+<a href="#/" class="link" id="back">Full List</a>
+<hr />
+<form name="uploadForm">
+	Category: <input type="text" name="category" ng-model="category" /><br />
+	Display text: <input type="text" name="displayText" ng-model="displayText" /><br />
+	Uploader: <input type="text" name="uploader" ng-model="uploader" /><br />
+	<input type="file" id="file" name="file" /><br />
+	Only MP3 files are supported!<br />
+	<button ng-click="upload()">Upload</button><br />
+</form>
+<br />
+Button Preview:<br />
+<button class="soundButton">{{ displayText }}</button>
