@@ -60,9 +60,9 @@ namespace FlyingParrot.Models {
                 CompareCat.Parameters.Add("@Category", SqlDbType.NVarChar).SqlValue = NewSound.Category;
                 int? Id = CompareCat.ExecuteNonQuery();
                 if(Id == null) {
-                    SqlCommand CreateCat = new SqlCommand("INSERT INTO CATEGORIES([Name]) VALUES(@Category)");
+                    SqlCommand CreateCat = new SqlCommand("INSERT INTO CATEGORIES([Name]) OUTPUT Inserted.Id VALUES(@Category)");
                     CreateCat.Parameters.Add("@Category", SqlDbType.NVarChar).SqlValue = NewSound.Category;
-                    Id = CreateCat.ExecuteNonQuery();
+                    Id = (int) CreateCat.ExecuteScalar();
                 }
                 SqlCommand soundCMD = new SqlCommand("INSERT INTO SOUNDS([FILENAME], [UPLOADER], [TEXT], [CATEGORY]) VALUES(@Filename, @Uploader, @Text, @Category)");
                 soundCMD.Parameters.Add("@Filename", SqlDbType.NVarChar).SqlValue = NewSound.Filename;

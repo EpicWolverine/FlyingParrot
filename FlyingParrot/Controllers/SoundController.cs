@@ -5,6 +5,11 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using FlyingParrot.Models;
+using System.IO;
+using System.Web;
+using System.Data.SqlClient;
+using System.Data;
+using System.Configuration;
 
 namespace FlyingParrot.Controllers
 {
@@ -33,6 +38,33 @@ namespace FlyingParrot.Controllers
         public bool AddSoundToDb([FromBody] Sound NewSound) {
             return Sound.AddData(NewSound);
 		}
+
+        [HttpPost]
+        public int AddSoundFile([FromUri] string Input) {
+            var task = this.Request.Content.ReadAsStreamAsync();
+            task.Wait();
+            Stream requestStream = task.Result;
+            try
+            {
+                Stream fileStream = File.Create(HttpContext.Current.Server.MapPath("~/" + Input));
+                requestStream.CopyTo(fileStream);
+                fileStream.Close();
+                requestStream.Close();
+            }
+            catch (IOException)
+            {
+                throw new HttpResponseException(HttpStatusCode.InternalServerError);
+            }
+            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString))
+            {
+                con.Open();
+                SqlCommand FetchId = new SqlCommand("SELECT [Id] FROM SOUNDS WHERE Filename = @Input");
+                FetchId.Parameters.Add("@Input", SqlDbType.Int).SqlValue = Input;
+                int Id = (int) FetchId.ExecuteScalar();
+                con.Close();
+                return Id;
+            }
+        }
 
 		[HttpGet]
 		public IEnumerable<Sound> GetSoundsByCategory(int category) {
