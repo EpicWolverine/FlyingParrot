@@ -52,6 +52,7 @@ namespace FlyingParrot.Models {
 				return true;
 			}
 		}
+
         public static bool AddData(Sound NewSound) {
             using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString)) {
                 con.Open();

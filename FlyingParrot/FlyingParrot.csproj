@@ -89,6 +89,7 @@
     <Content Include="index.html" />
     <Content Include="js\app.js" />
     <Content Include="js\controllers\CatController.js" />
+    <Content Include="js\controllers\UploadController.js" />
     <Content Include="js\controllers\HomeController.js" />
     <Content Include="js\controllers\MainController.js" />
     <Content Include="js\controllers\SoundController.js" />
@@ -98,6 +99,7 @@
     <Content Include="js\directives\soundButton.html" />
     <Content Include="js\directives\soundButton.js" />
     <Content Include="js\services\Page.js" />
+    <Content Include="views\upload.html" />
     <Content Include="views\cat.html" />
     <Content Include="views\home.html" />
     <Content Include="views\sound.html" />
@@ -140,9 +142,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>56549</DevelopmentServerPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:56549/</IISUrl>
+          <IISUrl>http://localhost:57668/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
