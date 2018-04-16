@@ -16,9 +16,10 @@ app.controller('UploadController', ['$scope', 'Page', '$http', '$location', func
 
 		r.onloadend = function (e) {
 			var metadata = {
-				"text": $scope.displayText,
+				"text": $scope.displayText.toString(),
 				"uploader": $scope.uploader,
-				"category": $scope.category
+				"categoryName": $scope.category,
+				"filename": Date.now().toString()
 			};
 			var data = e.target.result;
 			//send your binary data via $http or $resource or do anything else with it
@@ -29,7 +30,7 @@ app.controller('UploadController', ['$scope', 'Page', '$http', '$location', func
 				headers: { 'Content-Type': "application/json" }
 			}).success(function (response) {
 				$http({
-					url: "/api/Sound/Upload",
+					url: "/api/Sound/Upload?input=" + metadata.filename,
 					method: "POST",
 					data: data,
 					headers: { 'Content-Type': "audio/mpeg" }
@@ -41,7 +42,6 @@ app.controller('UploadController', ['$scope', 'Page', '$http', '$location', func
 			}).error(function (response) {
 				alert("Failed to send metadata.\n" + response);
 			});
-			alert(data);
 		}
 
 		r.readAsBinaryString(f);
