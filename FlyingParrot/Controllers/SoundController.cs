@@ -34,38 +34,38 @@ namespace FlyingParrot.Controllers
 			return sound;
 		}
 
-        [HttpPost]
-        public bool AddSoundToDb([FromBody] Sound NewSound) {
-            return Sound.AddData(NewSound);
+		[HttpPost]
+		public bool AddSoundToDb([FromBody] Sound NewSound) {
+			return Sound.AddData(NewSound);
 		}
 
-        [HttpPost]
+		[HttpPost]
 		[Route("Upload")]
 		public int AddSoundFile([FromUri] string Input) {
-            var task = this.Request.Content.ReadAsStreamAsync();
-            task.Wait();
-            Stream requestStream = task.Result;
-            try
-            {
-                Stream fileStream = File.Create(HttpContext.Current.Server.MapPath("~/sounds/" + Input + ".mp3"));
-                requestStream.CopyTo(fileStream);
-                fileStream.Close();
-                requestStream.Close();
-            }
-            catch (IOException)
-            {
-                throw new HttpResponseException(HttpStatusCode.InternalServerError);
-            }
-            using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString))
-            {
-                con.Open();
-                SqlCommand FetchId = new SqlCommand("SELECT [Id] FROM SOUNDS WHERE [Filename] = @Input", con);
-                FetchId.Parameters.Add("@Input", SqlDbType.NVarChar).SqlValue = Input;
-                int Id = (int) FetchId.ExecuteScalar();
-                con.Close();
-                return Id;
-            }
-        }
+			var task = this.Request.Content.ReadAsStreamAsync();
+			task.Wait();
+			Stream requestStream = task.Result;
+			try
+			{
+				Stream fileStream = File.Create(HttpContext.Current.Server.MapPath("~/sounds/" + Input + ".mp3"));
+				requestStream.CopyTo(fileStream);
+				fileStream.Close();
+				requestStream.Close();
+			}
+			catch (IOException)
+			{
+				throw new HttpResponseException(HttpStatusCode.InternalServerError);
+			}
+			using (SqlConnection con = new SqlConnection(ConfigurationManager.ConnectionStrings["defaultConnection"].ConnectionString))
+			{
+				con.Open();
+				SqlCommand FetchId = new SqlCommand("SELECT [Id] FROM SOUNDS WHERE [Filename] = @Input", con);
+				FetchId.Parameters.Add("@Input", SqlDbType.NVarChar).SqlValue = Input;
+				int Id = (int) FetchId.ExecuteScalar();
+				con.Close();
+				return Id;
+			}
+		}
 
 		[HttpGet]
 		public IEnumerable<Sound> GetSoundsByCategory(int category) {
