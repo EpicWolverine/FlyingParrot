@@ -21,7 +21,7 @@ app.controller('UploadController', ['$scope', 'Page', '$http', '$location', func
 				};
 				$http.post("/api/Sound/Upload?input=" + metadata.filename, f, config)
 					.then(function successCallback(response) {
-						$location.path("/sound/" + response).replace();
+						$location.path("/sound/" + response.data).replace();
 					}, function errorCallback(response) {
 						alert("Failed to upload file.\n" + response);
 					});
