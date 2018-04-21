@@ -59,7 +59,7 @@ namespace FlyingParrot.Models {
 				con.Open();
 				SqlCommand CompareCat = new SqlCommand("SELECT [Id] FROM CATEGORIES WHERE Name = @Category", con);
 				CompareCat.Parameters.Add("@Category", SqlDbType.NVarChar).SqlValue = NewSound.CategoryName;
-				int? Id = (int)CompareCat.ExecuteScalar();
+				int? Id = (int?)CompareCat.ExecuteScalar();
 				if(Id == null) {
 					SqlCommand CreateCat = new SqlCommand("INSERT INTO CATEGORIES([Name]) OUTPUT Inserted.Id VALUES(@Category)", con);
 					CreateCat.Parameters.Add("@Category", SqlDbType.NVarChar).SqlValue = NewSound.CategoryName;
